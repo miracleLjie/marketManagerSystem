@@ -49,13 +49,8 @@ Copy.template = `<nav class="navbar navbar-default" style="background: linear-gr
         background: radial-gradient(#70c2f4,#3a8dc1, #035384, #4696c7,#83d1f5);
         border-radius: 50%;"></span>
 </h4>
-<<<<<<< HEAD
-<a href="/html/bill-manager.html" class="list-group-item list-group-item-info" style="background: url(/images/zd.png) 0 center no-repeat;color: #0042a8;">账单管理</a>
-<a href="/html/supplier.html" class="list-group-item list-group-item-info supplier" style="background: url(/images/gys.png) 0 center no-repeat;color: #0042a8;">供应商管理</a>
-=======
 <a href="/html/bill_manager.html" class="list-group-item list-group-item-info" style="background: url(/images/zd.png) 0 center no-repeat;color: #0042a8;">账单管理</a>
-<a href="#" class="list-group-item list-group-item-info" style="background: url(/images/gys.png) 0 center no-repeat;color: #0042a8;">供应商管理</a>
->>>>>>> fab8355b8b4a88b502cd3acdbadc8fb49ff8502e
+<a href="/html/supplier.html" class="list-group-item list-group-item-info supplier" style="background: url(/images/gys.png) 0 center no-repeat;color: #0042a8;">供应商管理</a>
 <a href="#" class="list-group-item list-group-item-info" style="background: url(/images/yh.png) 0 center no-repeat;color: #0042a8;">用户管理</a>
 <a href="#" class="list-group-item list-group-item-info" style="background: url(/images/mm.png) 0 center no-repeat;color: #0042a8;">密码修改</a>
 <a href="#" class="list-group-item list-group-item-info" style="background: url(/images/tc.png) 0 center no-repeat;color: #0042a8;">退出系统</a>
@@ -65,7 +60,6 @@ $.extend(Copy.prototype, {
     createDom() {
         $(Copy.template).appendTo("header");
     },
-<<<<<<< HEAD
     addListener(){
         setInterval(this.fn,1000);
         $(".list-group").on("click","a",this.clickHandler);
@@ -73,12 +67,6 @@ $.extend(Copy.prototype, {
         $(".link-login").on("click",this.loginHandler);
         // index退出按钮
         $(".link-logout").on("click",this.logoutHandler);
-
-=======
-    addListener() {
-        setInterval(this.fn, 1000);
-        $(".list-group").on("click", "a", this.clickHandler);
->>>>>>> fab8355b8b4a88b502cd3acdbadc8fb49ff8502e
     },
     clickHandler(event) {
         $(event.target).addClass("active").siblings("a").removeClass("active");
@@ -88,7 +76,6 @@ $.extend(Copy.prototype, {
             "background-color": ""
         });
     },
-<<<<<<< HEAD
     loginHandler(){
         location.href = "/html/login.html";
     },
@@ -115,10 +102,7 @@ $.extend(Copy.prototype, {
 			$(".link-login").remove();
 		}
 	},
-    fn(){
-=======
     fn() {
->>>>>>> fab8355b8b4a88b502cd3acdbadc8fb49ff8502e
         var time = new Date();
         var str = "";
         //    console.log(time);
