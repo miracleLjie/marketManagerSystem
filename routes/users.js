@@ -1,9 +1,9 @@
 var express = require('express');
 var router = express.Router();
-
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
+const userService = require("../services/user_services.js");
+// 用户登录
+router.post("/login", userService.login);
+// 退出
+router.get("/logout", userService.logout);
 
 module.exports = router;

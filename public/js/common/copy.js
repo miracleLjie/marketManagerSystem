@@ -2,6 +2,7 @@ function Copy(){
     this.createDom();
     this.fn();
     this.addListener();
+    this.load();
 }
 Copy.template=`<nav class="navbar navbar-default" style="background: linear-gradient(to bottom,#60acf0,#64a5df,#62a0dd,#5994d6,#4f8ace,#4880ca);margin-bottom:0; ">
 <div class="container-fluid">
@@ -16,11 +17,14 @@ Copy.template=`<nav class="navbar navbar-default" style="background: linear-grad
   </div>
 
   <!-- Collect the nav links, forms, and other content for toggling -->
-    <ul class="nav navbar-nav navbar-right" style="margin-right: 30px;margin-top: 8px;">
+    <ul class="nav navbar-nav navbar-right" style="margin-right: 30px;margin-top: 2px;">
       <li><div class="btn-group">
-            <div class="login-success" style="display: inline-block;float: left;color:#fff;margin-top: 6px;margin-right: 5px;">你好！xxx</div>
-            <button class="btn" style="margin-right: 5px;background-color: #8bc93a;color:#fff;border-radius: 5px;">登录</button>
-            <button class="btn" style="background-color: #8bc93a;color:#fff;border-radius: 5px;">退出</button>
+            <div class="login-success hide" style="display: inline-block;float: left;color:#fff;margin-top: 12px;margin-right: 5px;">
+                你好！xxx
+            </div>
+            <button class="btn link-logout hide" style="background-color: #8bc93a;color:#fff;border-radius: 5px;margin-top:6px;">退出</button>
+            <button class="btn link-login" style="margin-right: 5px;margin-top:6px;background-color: #8bc93a;color:#fff;border-radius: 5px;">登录</button>
+            
           </div></li>
     </ul>
   </div><!-- /.navbar-collapse -->
@@ -46,7 +50,7 @@ Copy.template=`<nav class="navbar navbar-default" style="background: linear-grad
         border-radius: 50%;"></span>
 </h4>
 <a href="/html/bill-manager.html" class="list-group-item list-group-item-info" style="background: url(/images/zd.png) 0 center no-repeat;color: #0042a8;">账单管理</a>
-<a href="#" class="list-group-item list-group-item-info" style="background: url(/images/gys.png) 0 center no-repeat;color: #0042a8;">供应商管理</a>
+<a href="/html/supplier.html" class="list-group-item list-group-item-info supplier" style="background: url(/images/gys.png) 0 center no-repeat;color: #0042a8;">供应商管理</a>
 <a href="#" class="list-group-item list-group-item-info" style="background: url(/images/yh.png) 0 center no-repeat;color: #0042a8;">用户管理</a>
 <a href="#" class="list-group-item list-group-item-info" style="background: url(/images/mm.png) 0 center no-repeat;color: #0042a8;">密码修改</a>
 <a href="#" class="list-group-item list-group-item-info" style="background: url(/images/tc.png) 0 center no-repeat;color: #0042a8;">退出系统</a>
@@ -59,11 +63,42 @@ $.extend(Copy.prototype,{
     addListener(){
         setInterval(this.fn,1000);
         $(".list-group").on("click","a",this.clickHandler);
+        // index登录按钮
+        $(".link-login").on("click",this.loginHandler);
+        // index退出按钮
+        $(".link-logout").on("click",this.logoutHandler);
+
     },
     clickHandler(event){
         $(event.target).addClass("active").siblings("a").removeClass("active");
         $(event.target).css({"background-color":"#92c609"}).siblings("a").css({"background-color":""});
     },
+    loginHandler(){
+        location.href = "/html/login.html";
+    },
+    logoutHandler(){
+        $.getJSON("/users/logout", (data)=>{
+			if (data.res_body.status) {
+				sessionStorage.removeItem("loginUser");
+				window.location.href = "/html/login.html";
+			}
+		})
+    },
+    load() {
+		// 页面加载时要判断是否有用户登录过，有则显示用户信息及注销链接
+		let user = sessionStorage.loginUser;
+		if (user) {
+			user = JSON.parse(user);
+			$(".login-success")
+				.removeClass("hide")
+                .text(`你好，${user.username} `);
+            $(".link-logout").removeClass("hide");
+            $("._user").text(`${user.username}`);
+            $("._welcome").text("欢迎来到超市账单管理系统!");
+            // 登录按钮操作
+			$(".link-login").remove();
+		}
+	},
     fn(){
         var time = new Date();
         var str= "";
