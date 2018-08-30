@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
@@ -12,6 +13,21 @@ const suppliersRouter = require('./routes/suppliers.js');
 // 创建express应用实例
 const app = express();
 // 模板引擎
+=======
+var createError = require('http-errors');
+var express = require('express');
+var path = require('path');
+var cookieParser = require('cookie-parser');
+var logger = require('morgan');
+
+var indexRouter = require('./routes/index');
+var usersRouter = require('./routes/users');
+var BillsRouter=require("./routes/bills.js");
+
+var app = express();
+
+// view engine setup
+>>>>>>> fab8355b8b4a88b502cd3acdbadc8fb49ff8502e
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 // 使用各中间件完成应用功能
@@ -32,7 +48,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 // 使用路由中间件
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+<<<<<<< HEAD
 app.use('/suppliers', suppliersRouter); // 访问positions目录下资源
+=======
+app.use("/bills",BillsRouter);
+>>>>>>> fab8355b8b4a88b502cd3acdbadc8fb49ff8502e
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
