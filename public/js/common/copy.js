@@ -1,9 +1,9 @@
-function Copy(){
+function Copy() {
     this.createDom();
     this.fn();
     this.addListener();
 }
-Copy.template=`<nav class="navbar navbar-default" style="background: linear-gradient(to bottom,#60acf0,#64a5df,#62a0dd,#5994d6,#4f8ace,#4880ca);margin-bottom:0; ">
+Copy.template = `<nav class="navbar navbar-default" style="background: linear-gradient(to bottom,#60acf0,#64a5df,#62a0dd,#5994d6,#4f8ace,#4880ca);margin-bottom:0; ">
 <div class="container-fluid">
   <!-- Brand and toggle get grouped for better mobile display -->
   <div class="navbar-header">
@@ -45,53 +45,64 @@ Copy.template=`<nav class="navbar navbar-default" style="background: linear-grad
         background: radial-gradient(#70c2f4,#3a8dc1, #035384, #4696c7,#83d1f5);
         border-radius: 50%;"></span>
 </h4>
-<a href="/html/bill-manager.html" class="list-group-item list-group-item-info" style="background: url(/images/zd.png) 0 center no-repeat;color: #0042a8;">账单管理</a>
+<a href="/html/bill_manager.html" class="list-group-item list-group-item-info" style="background: url(/images/zd.png) 0 center no-repeat;color: #0042a8;">账单管理</a>
 <a href="#" class="list-group-item list-group-item-info" style="background: url(/images/gys.png) 0 center no-repeat;color: #0042a8;">供应商管理</a>
 <a href="#" class="list-group-item list-group-item-info" style="background: url(/images/yh.png) 0 center no-repeat;color: #0042a8;">用户管理</a>
 <a href="#" class="list-group-item list-group-item-info" style="background: url(/images/mm.png) 0 center no-repeat;color: #0042a8;">密码修改</a>
 <a href="#" class="list-group-item list-group-item-info" style="background: url(/images/tc.png) 0 center no-repeat;color: #0042a8;">退出系统</a>
 </div>
 </div>`;
-$.extend(Copy.prototype,{
-    createDom(){
+$.extend(Copy.prototype, {
+    createDom() {
         $(Copy.template).appendTo("header");
     },
-    addListener(){
-        setInterval(this.fn,1000);
-        $(".list-group").on("click","a",this.clickHandler);
+    addListener() {
+        setInterval(this.fn, 1000);
+        $(".list-group").on("click", "a", this.clickHandler);
     },
-    clickHandler(event){
+    clickHandler(event) {
         $(event.target).addClass("active").siblings("a").removeClass("active");
-        $(event.target).css({"background-color":"#92c609"}).siblings("a").css({"background-color":""});
+        $(event.target).css({
+            "background-color": "#92c609"
+        }).siblings("a").css({
+            "background-color": ""
+        });
     },
-    fn(){
+    fn() {
         var time = new Date();
-        var str= "";
-    //    console.log(time);
+        var str = "";
+        //    console.log(time);
         var year = time.getFullYear();
-        var mon = time.getMonth()+1;
+        var mon = time.getMonth() + 1;
         var day = time.getDate();
         var h = time.getHours();
         var m = time.getMinutes();
         var s = time.getSeconds();
         var week = time.getDay();
-        switch (week){
-            case 0:week="日";
+        switch (week) {
+            case 0:
+                week = "日";
                 break;
-            case 1:week="一";
+            case 1:
+                week = "一";
                 break;
-            case 2:week="二";
+            case 2:
+                week = "二";
                 break;
-            case 3:week="三";
+            case 3:
+                week = "三";
                 break;
-            case 4:week="四";
+            case 4:
+                week = "四";
                 break;
-            case 5:week="五";
+            case 5:
+                week = "五";
                 break;
-            case 6:week="六";
+            case 6:
+                week = "六";
                 break;
         }
-        str = year +"年"+mon+"月"+day+"日"+"&nbsp;"+h+":"+m+":"+s+"&nbsp;"+"星期"+week;
+        str = year + "年" + mon + "月" + day + "日" + "&nbsp;" + h + ":" + m + ":" + s + "&nbsp;" + "星期" + week;
         $(".time").html(str);
     }
 });
