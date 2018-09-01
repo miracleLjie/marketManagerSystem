@@ -13,7 +13,7 @@ Copy.template = `<nav class="navbar navbar-default" style="background: linear-gr
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
-    <a class="navbar-brand" href="javascript:void(0)"style="background:url(/images/buy.png) 30px center no-repeat;color:#fff;font-size: 22px;padding-left: 80px;">超市账单管理系统</a>
+    <a class="navbar-brand" href="/"style="background:url(/images/buy.png) 30px center no-repeat;color:#fff;font-size: 22px;padding-left: 80px;">超市账单管理系统</a>
   </div>
 
   <!-- Collect the nav links, forms, and other content for toggling -->
@@ -53,7 +53,7 @@ Copy.template = `<nav class="navbar navbar-default" style="background: linear-gr
 <a href="/html/supplier.html" class="list-group-item list-group-item-info supplier" style="background: url(/images/gys.png) 0 center no-repeat;color: #0042a8;">供应商管理</a>
 <a href="#" class="list-group-item list-group-item-info" style="background: url(/images/yh.png) 0 center no-repeat;color: #0042a8;">用户管理</a>
 <a href="#" class="list-group-item list-group-item-info" style="background: url(/images/mm.png) 0 center no-repeat;color: #0042a8;">密码修改</a>
-<a href="#" class="list-group-item list-group-item-info" style="background: url(/images/tc.png) 0 center no-repeat;color: #0042a8;">退出系统</a>
+<a href="#" class="list-group-item list-group-item-info quitSystem" style="background: url(/images/tc.png) 0 center no-repeat;color: #0042a8;">退出系统</a>
 </div>
 </div>`;
 $.extend(Copy.prototype, {
@@ -67,6 +67,12 @@ $.extend(Copy.prototype, {
         $(".link-login").on("click",this.loginHandler);
         // index退出按钮
         $(".link-logout").on("click",this.logoutHandler);
+        // 退出系统
+        $(".quitSystem").on("click",this.quitSystem)
+    },
+    quitSystem(){
+        sessionStorage.removeItem("loginUser");
+	    location.href = "/html/login.html";
     },
     clickHandler(event) {
         $(event.target).addClass("active").siblings("a").removeClass("active");

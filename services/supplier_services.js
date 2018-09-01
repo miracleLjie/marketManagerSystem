@@ -12,7 +12,7 @@ const SupplierService = {
 				res.json({res_code:1, res_error:"", res_body: data})
 			})
 			.catch(err=>{
-				res.json({res_code:-1, res_error:err, res_body: {}})
+				res.json({res_code:-1, res_error:"供应商已存在", res_body: {}})
 			});
 	},
 	// 分页查询职位
@@ -36,6 +36,38 @@ const SupplierService = {
 			}).catch(err=>{
 				res.json({res_code:-1, res_error:err, res_body: {}});
 			});
+	},
+	// 根据id删除数据库数据
+	deleteById(req,res,next){
+		const {_id} = req.body;
+		// 调用数据库删除方法
+		SupplierDao.delete({_id})
+		.then(data=>{
+			res.json({res_code:1, res_error:"", res_body: data})
+		}).catch(err=>{
+			res.json({res_code:-1, res_error:"删除失败", res_body: {}})
+		})
+	},
+	// 修改供应商信息
+	updateSupplier(req,res,next){
+		const {Upnumber,Upname,Uplinkman,Upphone,Upadress,Upfax} = req.body;
+		// 调用数据库修改方法
+		SupplierDao.update({Upnumber,Upname,Uplinkman,Upphone,Upadress,Upfax})
+		.then(data=>{
+			res.json({res_code:1, res_error:"", res_body: data})
+		}).catch(err=>{
+			res.json({res_code:-1, res_error:"删除失败", res_body: {}})
+		})
+	},
+	// 在数据库里面查找供应商信息
+	findSupplier(req,res,next){
+		const {name} = req.body;
+		SupplierDao.find({name})
+			.then(data=>{
+				res.json({res_code:1, res_error:"", res_body: data})
+			}).catch(err=>{
+				res.json({res_code:-1, res_error:"失败", res_body: {}})
+			})
 	}
 }
 

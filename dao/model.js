@@ -14,7 +14,7 @@ const Supplier = mongoose.model("supplier", {
 	number:String,
 	name: String,
 	linkman: String,
-	phone: Number,
+	phone: String,
 	adress: String,
 	fax:String,
 	time:String
@@ -28,5 +28,4 @@ const Bill=mongoose.model("bill",{
     pay:String,
     time:String
 });
-
 module.exports = {User,Supplier,Bill};
