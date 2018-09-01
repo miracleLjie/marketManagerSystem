@@ -16,14 +16,22 @@ const SupplierDao = {
 		// 查询
 		return Supplier.find().skip((page-1)*pageSize).limit(pageSize);
 	},
-	update() {
-
+	// 修改供应商信息
+	update(updateInfo) {
+		return Supplier.update({_id:updateInfo.Upnumber},{$set:{
+			name:updateInfo.Upname,
+			linkman:updateInfo.Uplinkman,
+			phone:"123",
+			adress:updateInfo.Upadress,
+			fax:updateInfo.Upfax
+		}});
 	},
-	find() {
-
+	find(name) {
+		return Supplier.find(name);
 	},
-	delete() {
-
+	// 删除供应商信息
+	delete(info) {
+		return Supplier.remove(info);
 	}
 }
 

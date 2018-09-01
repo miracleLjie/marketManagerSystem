@@ -11,4 +11,14 @@ router.post("/add", SupplierService.add);
 // http://localhost:3000/suppliers/list?page=
 router.get("/list", SupplierService.listByPage);
 
+// 删除供应商信息
+router.post("/delete",SupplierService.deleteById);
+
+// 修改供应商信息
+router.post("/update",SupplierService.updateSupplier);
+
+// 查询信息
+router.post("/find",SupplierService.findSupplier);
+
+
 module.exports = router;

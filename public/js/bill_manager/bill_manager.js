@@ -9,6 +9,7 @@ Bill.listInfoTemplate=`
 <td style="text-align: center"><%=i+1%></td>
 <td style="text-align: center"><%=bills[i].name%> </td>
 <td style="text-align: center"><%=bills[i].company%></td>
+<td style="text-align: center"><%=bills[i].num%></td>
 <td style="text-align: center"><%=bills[i].sum%></td>
 <td style="text-align: center"><%=bills[i].pay%></td>
 <td style="text-align: center"><%=bills[i].time%></td>
