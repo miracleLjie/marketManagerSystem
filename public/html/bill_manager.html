@@ -25,21 +25,23 @@
             </div>
           </nav>
           <nav class="navbar navbar-default" style="margin-bottom: 0;">
-          <form class="navbar-form navbar-left" role="search">
+          <form class="navbar-form navbar-left" role="search" class="">
             <div class="form-group">
-              <span>商品名称：</span><input type="text" class="form-control" placeholder="请输入商品名称">
+              <span>商品名称：</span><input type="text" class="form-control"  name="name" id="searchName" placeholder="请输入商品名称">
               <span>供应商：</span>
-              <select name="" id="" style="width:100px;height: 34px;border-radius: 4px;">
-                  <option value="">--请选择--</option>
+              <select name="provide" id="searchProvide" style="width:100px;height: 34px;border-radius: 4px;">
+                  <option value="0">--请选择--</option>
+                  <option value="供应商01">供应商01</option>
+                  <option value="供应商02">供应商02</option>
               </select>
               <span>是否付款：</span>
-              <select name="" id="" style="width:100px;height: 34px;border-radius: 4px;">
-                <option value="">--请选择--</option>
-                <option value="">已付款</option>
-                <option value="">未付款</option>
+              <select name="pay" id="searchPay" style="width:100px;height: 34px;border-radius: 4px;">
+                <option value="0">--请选择--</option>
+                <option value="已付款">已付款</option>
+                <option value="未付款">未付款</option>
             </select>
             </div>
-            <button type="submit" class="btn btn-default" style="width:100px;background-color:#92c609!important;background: url(/images/search.png) 10px center no-repeat;color: #fff;margin-left: 20px;">查询</button>
+            <button type="button" class="btn btn-default btn-search" style="width:100px;background-color:#92c609!important;background: url(/images/search.png) 10px center no-repeat;color: #fff;margin-left: 20px;">查询</button>
             <button class="btn btn-default" onclick="return false" data-toggle="modal" data-target="#addModal" style="width:120px;background-color:#47acf1!important;margin-left: 130px;background: url(/images/tianjia.png) 1px center no-repeat;color: #fff;">添加订单</button>
           </form>
         </nav>
@@ -48,18 +50,23 @@
             <tr>
                 <th style="text-align: center">账单编号</th>
                 <th style="text-align: center">商品名称</th>
+                <th style="text-align: center">商品单位</th>
                 <th style="text-align: center">供应商</th>
+                <th style="text-align: center">数量</th>
                 <th style="text-align: center">账单金额</th>
                 <th style="text-align: center">是否付款</th>
                 <th style="text-align: center">创建时间</th>
                 <th style="text-align: center">操作</th>
             </tr>
             </thead>
-            <tbody>
+            <tbody class="wholeTbody">
                 
             </tbody>
+            <tbody class="searchTbody">
+                
+              </tbody>
           </table>
-          <nav aria-label="Page navigation pull-right">
+          <nav aria-label="Page navigation pull-right" class="navigation">
                 <ul class="pagination"></ul>
               </nav>
           </div>
@@ -71,32 +78,33 @@
                   <form>
                     <div class="form-group">
                       <label for="code" class="control-label">订单编号</label>
-                      <p class="form-control" id="code"></p>
+                      <p class="form-control" id="read-code"></p>
                     </div>
                     <div class="form-group">
                       <label for="name" class="control-label">商品名称</label>
-                      <p class="form-control" id="name"></p>
+                      <p class="form-control" id="read-name"></p>
                     </div>
                     <div class="form-group">
                             <label for="company" class="control-label">商品单位</label>
-                            <p class="form-control" id="company"></p>
-                          </div>
-                    <div class="form-group">
-                            <label for="num" class="control-label">商品数量</label>
-                            <p class="form-control" id="num"></p>
-                    </div>
-                    <div class="form-group">
-                            <label for="sum" class="control-label">总金额</label>
-                            <p class="form-control" id="sum"></p>
+                            <p class="form-control" id="read-company"></p>
                           </div>
                     <div class="form-group">
                             <label for="provide" class="control-label">供应商</label>
-                            <p id="provide"class="form-control">
+                            <p id="read-provide"class="form-control">
                             </p>
                     </div>
                     <div class="form-group">
+                            <label for="num" class="control-label">商品数量</label>
+                            <p class="form-control" id="read-num"></p>
+                    </div>
+                    <div class="form-group">
+                            <label for="sum" class="control-label">总金额</label>
+                            <p class="form-control" id="read-sum"></p>
+                          </div>
+                    
+                    <div class="form-group">
                             <label class="control-label">是否付款</label>
-                            <p id="pay-result"class="form-control"></p>
+                            <p id="read-pay" class="form-control"></p>
                           </div>
                   </form>
                 </div>
@@ -139,7 +147,7 @@
                                 <label class="control-label">是否付款</label>
                                 <input type="radio" name="pay" id="not-pay" value="未付款">未付款
                                 <input type="radio" name="pay"  checked="checked" id="pay" value="已付款">已付款
-                              </div>
+                        </div>
                         <div class="form-group">
                             <label for="time" class="control-label">时间</label>
                             <input type="text" class="form-control" name="time" id="time">
@@ -159,44 +167,58 @@
                       <div class="modal-content">
                         <div class="modal-body">
                           <form class="update-form">
+                              <div class="form-group hide">
+                                  <input type="text" class="form-control" name="upId" id="up-id">
+                              </div>
                             <div class="form-group">
-                              <label for="name" class="control-label">商品名称</label>
-                              <input type="text" class="form-control" name="name" id="name">
+                              <label for="up-name" class="control-label">商品名称</label>
+                              <input type="text" class="form-control" name="upname" id="up-name">
                             </div>
                             <div class="form-group">
-                                    <label for="company" class="control-label">商品单位</label>
-                                    <input type="text" class="form-control" name="company" id="company">
+                                    <label for="up-company" class="control-label">商品单位</label>
+                                    <input type="text" class="form-control" name="upcompany" id="up-company">
                                   </div>
                             <div class="form-group">
-                                    <label for="num" class="control-label">商品数量</label>
-                                    <input type="text" class="form-control" name="num" id="num">
+                                    <label for="up-num" class="control-label">商品数量</label>
+                                    <input type="text" class="form-control" name="upnum" id="up-num">
                             </div>
                             <div class="form-group">
-                                    <label for="sum" class="control-label">总金额</label>
-                                    <input type="text" class="form-control" name="sum" id="sum">
+                                    <label for="up-sum" class="control-label">总金额</label>
+                                    <input type="text" class="form-control" name="upsum" id="up-sum">
                                   </div>
                             <div class="form-group">
-                                    <label for="provide" class="control-label">供应商</label>
-                                    <select name="provide" id="provide"class="form-control">
-                                        <option value="0">--请选择相应的供应商--</option>
-                                        <option value="供应商01">供应商01</option>
-                                        <option value="供应商02">供应商02</option>
-                                    </select>
+                                    <label for="up-provide" class="control-label">供应商</label>
+                                    <input type="text"  class="form-control" name="upprovide" id="up-provide" value="供应商01">
                             </div>
                             <div class="form-group">
-                                    <label class="control-label">是否付款</label>
-                                    <input type="radio" name="pay" id="not-pay" value="未付款">未付款
-                                    <input type="radio" name="pay" id="pay" checked="checked" value="已付款">已付款
+                                    <label for="up-pay" class="control-label">是否付款</label>
+                                    <input type="text"  class="form-control" name="uppay" id="up-pay" value="未付款">
                                   </div>
                           </form>
                         </div>
                         <div class="modal-footer">
-                          <button type="button" class="btn btn-primary">修改</button>
+                          <button type="button" class="btn btn-primary btn-update">修改</button>
                           <button type="button" class="btn btn-default" data-dismiss="modal">返回</button>
                         </div>
                       </div>
                     </div>
                   </div>
+                  <div class="modal fade" tabindex="-1" role="dialog" id="deleteModal" aria-labelledby="gridSystemModalLabel">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                          <h4 class="modal-title" id="gridSystemModalLabel">确认删除</h4>
+                        </div>
+                        <div class="modal-body">
+                          <p>是否删除</p>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-primary btn-delete">确认删除</button>
+                          <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        </div>
+                      </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                  </div><!-- /.modal -->
     <script src="/lib/jquery/jquery-1.12.4.min.js"></script>
     <script src="/lib/bootstrap/js/bootstrap.min.js"></script>
     <script src="/lib/ejs/ejs.js"></script>
