@@ -154,7 +154,7 @@ $.extend(user.prototype, {
         $.post("/userControls/addUser", data, (data) => {
             console.log(data);
         }, "json");
-        // location = "/html/userControl.html";
+        location = "/html/userControl.html";
         // 创建 FormData 对象：包装待上传表单的数据
         // const formData = new FormData($(".add-users-form").get(0));
         // 使用 $.ajax() 方法
