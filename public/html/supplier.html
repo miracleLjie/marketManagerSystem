@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,42 +8,49 @@
     <title>供应商管理</title>
     <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css">
     <style>
-        .list-group a:nth-of-type(2){
+        .list-group a:nth-of-type(2) {
             background-color: rgb(146, 198, 9)!important;
         }
-        .right{
+        
+        .right {
             margin-left: 10px;
             height: 520px;
         }
-        .location{
+        
+        .location {
             height: 30px;
             line-height: 30px;
             border: 1px solid #e6eaf6;
             border-radius: 8px;
-            background: linear-gradient(to bottom, #fefefe,#ffffff,#f6fafd);
+            background: linear-gradient(to bottom, #fefefe, #ffffff, #f6fafd);
             color: #4a4a4a;
             padding-left: 30px;
         }
-        .location strong{
+        
+        .location strong {
             background: url(../images/home.png) 0 center no-repeat;
             display: inline-block;
             padding-left: 30px;
         }
-        .location span{
+        
+        .location span {
             color: #2179a9;
             font-weight: bold;
         }
-        .search{
+        
+        .search {
             height: 50px;
             line-height: 50px;
             background: #f6fafd;
             padding-left: 22px;
             color: #000;
         }
-        .search span{
+        
+        .search span {
             margin-left: 10px;
         }
-        .search .supplier_name{
+        
+        .search .supplier_name {
             width: 200px;
             height: 30px;
             outline: none;
@@ -50,7 +58,8 @@
             border: 1px solid #8ab2d5;
             border-radius: 4px;
         }
-        .search ._search{
+        
+        .search ._search {
             margin-left: 20px;
             width: 100px;
             padding: 0 20px;
@@ -62,7 +71,8 @@
             background: #87c212 url(../images/search.png) 10px center no-repeat;
             line-height: 30px;
         }
-        .search a{
+        
+        .search a {
             width: 130px;
             padding-left: 40px;
             /* float: right; */
@@ -77,13 +87,16 @@
             display: inline-block;
             text-decoration: none;
         }
-        .supplierTable th,td{
+        
+        .supplierTable th,
+        td {
             height: 30px;
             line-height: 30px;
             text-align: center;
         }
     </style>
 </head>
+
 <body>
     <header></header>
     <div class="right col-xs-10">
@@ -93,8 +106,8 @@
         </div>
         <div class="search">
             <span>供应商名称：</span>
-            <input type="text" class = "supplier_name" placeholder="请输入供应商的名称"/>
-            <input type="button" class="_search" value="查询"/>
+            <input type="text" class="supplier_name" placeholder="请输入供应商的名称" />
+            <input type="button" class="_search" value="查询" />
             <a href="#" data-toggle="modal" data-target="#addSupModal" class="addSupplier">添加供应商</a>
         </div>
         <table class="table table-bordered supplierTable">
@@ -111,9 +124,9 @@
                 </tr>
             </thead>
             <tbody>
-                
+
             </tbody>
-            
+
         </table>
         <!-- 分页 -->
         <nav aria-label="Page navigation" class="pull-right">
@@ -176,4 +189,5 @@
     <script src="/js/login.js"></script>
     <script src="/js/supplier.js"></script>
 </body>
+
 </html>

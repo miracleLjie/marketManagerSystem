@@ -51,8 +51,8 @@ Copy.template = `<nav class="navbar navbar-default" style="background: linear-gr
 </h4>
 <a href="/html/bill_manager.html" class="list-group-item list-group-item-info" style="background: url(/images/zd.png) 0 center no-repeat;color: #0042a8;">账单管理</a>
 <a href="/html/supplier.html" class="list-group-item list-group-item-info supplier" style="background: url(/images/gys.png) 0 center no-repeat;color: #0042a8;">供应商管理</a>
-<a href="#" class="list-group-item list-group-item-info" style="background: url(/images/yh.png) 0 center no-repeat;color: #0042a8;">用户管理</a>
-<a href="#" class="list-group-item list-group-item-info" style="background: url(/images/mm.png) 0 center no-repeat;color: #0042a8;">密码修改</a>
+<a href="/html/userControl.html" class="list-group-item list-group-item-info userControl" style="background: url(/images/yh.png) 0 center no-repeat;color: #0042a8;">用户管理</a>
+<a href="/html/passwordUpdate.html" class="list-group-item list-group-item-info passwordUpate" style="background: url(/images/mm.png) 0 center no-repeat;color: #0042a8;">密码修改</a>
 <a href="#" class="list-group-item list-group-item-info" style="background: url(/images/tc.png) 0 center no-repeat;color: #0042a8;">退出系统</a>
 </div>
 </div>`;
@@ -60,13 +60,13 @@ $.extend(Copy.prototype, {
     createDom() {
         $(Copy.template).appendTo("header");
     },
-    addListener(){
-        setInterval(this.fn,1000);
-        $(".list-group").on("click","a",this.clickHandler);
+    addListener() {
+        setInterval(this.fn, 1000);
+        $(".list-group").on("click", "a", this.clickHandler);
         // index登录按钮
-        $(".link-login").on("click",this.loginHandler);
+        $(".link-login").on("click", this.loginHandler);
         // index退出按钮
-        $(".link-logout").on("click",this.logoutHandler);
+        $(".link-logout").on("click", this.logoutHandler);
     },
     clickHandler(event) {
         $(event.target).addClass("active").siblings("a").removeClass("active");
@@ -76,32 +76,32 @@ $.extend(Copy.prototype, {
             "background-color": ""
         });
     },
-    loginHandler(){
+    loginHandler() {
         location.href = "/html/login.html";
     },
-    logoutHandler(){
-        $.getJSON("/users/logout", (data)=>{
-			if (data.res_body.status) {
-				sessionStorage.removeItem("loginUser");
-				window.location.href = "/html/login.html";
-			}
-		})
+    logoutHandler() {
+        $.getJSON("/users/logout", (data) => {
+            if (data.res_body.status) {
+                sessionStorage.removeItem("loginUser");
+                window.location.href = "/html/login.html";
+            }
+        })
     },
     load() {
-		// 页面加载时要判断是否有用户登录过，有则显示用户信息及注销链接
-		let user = sessionStorage.loginUser;
-		if (user) {
-			user = JSON.parse(user);
-			$(".login-success")
-				.removeClass("hide")
+        // 页面加载时要判断是否有用户登录过，有则显示用户信息及注销链接
+        let user = sessionStorage.loginUser;
+        if (user) {
+            user = JSON.parse(user);
+            $(".login-success")
+                .removeClass("hide")
                 .text(`你好，${user.username} `);
             $(".link-logout").removeClass("hide");
             $("._user").text(`${user.username}`);
             $("._welcome").text("欢迎来到超市账单管理系统!");
             // 登录按钮操作
-			$(".link-login").remove();
-		}
-	},
+            $(".link-login").remove();
+        }
+    },
     fn() {
         var time = new Date();
         var str = "";
