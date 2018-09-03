@@ -6,12 +6,14 @@ const userService = {
     adduser(req, res, next) {
         // 从请求主体中解构文本数据
         const { number, username, sex, birth, phone, usersClass, password, repassword } = req.body;
-        // 保存到数据库
+
+        const passCrypt = bcrypt.hashSync(password, 10);
+
         if (!password === repassword)
             return;
-        // const passCrypt = bcrypt.hashSync(password, 10);
+        // 保存到数据库
         userDao
-            .save({ number, username, sex, birth, phone, usersClass, password })
+            .save({ number, username, sex, birth, phone, usersClass, password: passCrypt })
             .then(data => {
                 res.json({ res_code: 1, res_error: "", res_body: data })
             })

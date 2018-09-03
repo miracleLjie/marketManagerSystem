@@ -13,7 +13,7 @@ Copy.template = `<nav class="navbar navbar-default" style="background: linear-gr
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
-    <a class="navbar-brand" href="javascript:void(0)"style="background:url(/images/buy.png) 30px center no-repeat;color:#fff;font-size: 22px;padding-left: 80px;">超市账单管理系统</a>
+    <a class="navbar-brand" href="/"style="background:url(/images/buy.png) 30px center no-repeat;color:#fff;font-size: 22px;padding-left: 80px;">超市账单管理系统</a>
   </div>
 
   <!-- Collect the nav links, forms, and other content for toggling -->
@@ -66,7 +66,14 @@ $.extend(Copy.prototype, {
         // index登录按钮
         $(".link-login").on("click", this.loginHandler);
         // index退出按钮
+
         $(".link-logout").on("click", this.logoutHandler);
+        // 退出系统
+        $(".quitSystem").on("click", this.quitSystem)
+    },
+    quitSystem() {
+        sessionStorage.removeItem("loginUser");
+        location.href = "/html/login.html";
     },
     clickHandler(event) {
         $(event.target).addClass("active").siblings("a").removeClass("active");

@@ -29,6 +29,50 @@ app.use(session({
     saveUninitialized: true,
     cookie: { maxAge: 45 * 60 * 1000 }
 }));
+
+// 判断用户是否已登录
+app.use(function(req, res, next) {
+    // 获取请求的URL
+    const { url } = req;
+    // 判断
+    // if (url.indexOf("/html/supplier") !== -1) {
+    //     // 获取在 session 中保存的登录用户信息
+    //     const user = req.session.loginUser;
+    //     if (!user) {
+    //         // res.sendFile(path.join(__dirname, "./public/index.html"));
+    //         res.redirect("/");
+    //         return false;
+    //     }
+    // }
+    // if (url.indexOf("/html/bill_manager") !== -1) {
+    //     // 获取在 session 中保存的登录用户信息
+    //     const user = req.session.loginUser;
+    //     if (!user) {
+    //         // res.sendFile(path.join(__dirname, "./public/index.html"));
+    //         res.redirect("/");
+    //         return false;
+    //     }
+    // }
+    // if (url.indexOf("/html/userControl") !== -1) {
+    //     // 获取在 session 中保存的登录用户信息
+    //     const user = req.session.loginUser;
+    //     if (!user) {
+    //         // res.sendFile(path.join(__dirname, "./public/index.html"));
+    //         res.redirect("/");
+    //         return false;
+    //     }
+    // }
+    // if (url.indexOf("/html/passwordUpdate") !== -1) {
+    //     // 获取在 session 中保存的登录用户信息
+    //     const user = req.session.loginUser;
+    //     if (!user) {
+    //         // res.sendFile(path.join(__dirname, "./public/index.html"));
+    //         res.redirect("/");
+    //         return false;
+    //     }
+    // }
+    next();
+});
 // 指明静态资源存放位置
 app.use(express.static(path.join(__dirname, 'public')));
 // 使用路由中间件

@@ -10,14 +10,23 @@ const BillDao={
         const pageSize=5;
         return Bill.find().skip((page-1)*pageSize).limit(pageSize);
     },
-    update(){
-
+    update(updateInfo){
+        return Bill.update({_id:updateInfo.upId},{$set:
+            {
+            name:updateInfo.upname,
+            company:updateInfo.upcompany,
+            num:updateInfo.upnum,
+            sum:updateInfo.upsum,
+            provide:updateInfo.upprovide,
+            pay:updateInfo.uppay
+        }
+    })
     },
-    find(){
-
+    find({name,provide,pay}){
+        return Bill.find({name,provide,pay});
     },
-    delete(){
-
+    delete(info){
+        return Bill.remove(info);
     }
 }
 module.exports=BillDao;

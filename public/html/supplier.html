@@ -94,6 +94,19 @@
             line-height: 30px;
             text-align: center;
         }
+        
+        .view-content-body li {
+            width: 100px;
+            text-align: right;
+            font-weight: bold;
+            list-style: none;
+            display: inline-block;
+        }
+        
+        .t_body tr:hover {
+            background-color: #e9f9ca;
+            cursor: pointer;
+        }
     </style>
 </head>
 
@@ -117,7 +130,7 @@
                     <th>供应商名称</th>
                     <th>联系人</th>
                     <th>联系电话</th>
-                    <th>联系电地址</th>
+                    <th>联系地址</th>
                     <th>传真</th>
                     <th>创建时间</th>
                     <th>操作</th>
@@ -127,12 +140,12 @@
 
             </tbody>
 
+            <tbody class="t_body"></tbody>
+            <tbody class="s_body"></tbody>
         </table>
         <!-- 分页 -->
         <nav aria-label="Page navigation" class="pull-right">
-            <ul class="pagination">
-                <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
-            </ul>
+            <ul class="pagination"></ul>
         </nav>
     </div>
     <!-- 添加供应商模态框 -->
@@ -176,8 +189,94 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default">返回</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">返回</button>
                     <button type="button" class="btn btn-primary btn-add-sup" data-dismiss="modal">保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 删除模态框 -->
+    <div class="modal fade deleteModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">提示</h4>
+                </div>
+                <div class="modal-body">
+                    <p>你确定要删除该供应商吗？</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-delete" data-dismiss="modal">确定</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 修改模态框 -->
+    <div class="modal fade" id="updateModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span>&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">供应商信息修改</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="update-supplier-form">
+                        <div class="form-group hide">
+                            <label for="addSupplierNumber">供应商编码</label>
+                            <input type="text" class="form-control" name="Upnumber" id="upNumber" placeholder="请输入供应商编码" autocomplete="off" readonly="readonly">
+                        </div>
+                        <div class="form-group">
+                            <label for="addSupplierName">供应商名称</label>
+                            <input type="text" class="form-control" name="Upname" id="upName" autocomplete="off">
+                        </div>
+                        <div class="form-group">
+                            <label for="addLinkman">联系人</label>
+                            <input type="text" class="form-control" name="Uplinkman" id="upLinkman" autocomplete="off">
+                        </div>
+                        <div class="form-group">
+                            <label for="addPhone">联系电话</label>
+                            <input type="text" class="form-control" name="Upphone" id="upPhone" autocomplete="off">
+                        </div>
+                        <div class="form-group">
+                            <label for="addAdress">联系地址</label>
+                            <input type="text" class="form-control" name="Upadress" id="upAdress" autocomplete="off">
+                        </div>
+                        <div class="form-group">
+                            <label for="addFax">传真</label>
+                            <input type="text" class="form-control" name="Upfax" id="upFax" autocomplete="off">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">返回</button>
+                    <button type="button" class="btn btn-primary btn-update-sup" data-dismiss="modal">保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 查看模态框 -->
+    <div class="modal fade viewModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">查看供应商</h4>
+                </div>
+                <div class="modal-body view-content-body">
+                    <ul>
+                        <li>供应商编码：</li><span class="vnumber"></span><br>
+                        <li>供应商名称：</li><span class="vname"></span><br>
+                        <li>联系人：</li><span class="vlinkman"></span><br>
+                        <li>联系电话：</li><span class="vphone"></span><br>
+                        <li>联系地址：</li><span class="vadress"></span><br>
+                        <li>传真：</li><span class="vfax"></span><br>
+                        <li>创建时间：</li><span class="vtime"></span>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">返回</button>
                 </div>
             </div>
         </div>
